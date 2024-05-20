@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Successful Deletion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #DEE0E8;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 {
+            color: #000338;
+            font-size: 36px;
+        }
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000338;
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        a:hover {
+            background-color: #0009A0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Successfully deleted file!</h1>
+        <a href="{% url 'login:mainpage' %}">Return to the Mainpage</a>
+</body>
+</html>

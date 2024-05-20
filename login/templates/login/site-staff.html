@@ -1,0 +1,157 @@
+{% extends 'login/navbar.html' %}
+   # depending on where you locate that file
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href='https://fonts.googleapis.com/css?family=Hanken Grotesk' rel='stylesheet'>
+    <title>Site Staff</title>
+    <style>
+        body {
+        background-color: #F1F1F1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: auto 15px;
+        }
+
+        .upload-module {
+            font-family:'Hanken Grotesk';
+            border: 3px solid #00056A;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            text-align: left;
+            background-color: #DEE0E8;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.1);
+            font-size: 18px;
+        }
+
+        .upload-module.resolved {
+            background-color: rgba(168, 170, 179, 0.7);
+        }
+
+        h1, h2 {
+            text-align: left;
+            margin-left: 20px;
+            text-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h4{
+            margin-top: 5px;
+            margin-bottom: 20px;
+            text-align: left;
+            text-weight: bold;
+        }
+
+        .sort-form {
+            text-align: right;
+            vertical-align: middle;
+            margin-bottom: 10px;
+        }
+
+        .sort {
+            padding: 5px 12px;
+            border: none;
+            background-color: #2A313A;
+            color: #FFFFFF;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .new-status-image{
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 36px;
+            height: auto;
+        }
+
+        .file-display img {
+            max-height: 3%;
+            width: auto;
+        }
+
+        .file-display embed[type="application/pdf"] {
+            width: 100%;
+            height: 300px;
+        }
+
+        .file-display iframe {
+            width: 100%;
+            height: 300px;
+            background-color: #FFFF;
+        }
+
+        .priority-image{
+            position: flex;
+            top: 10px;
+            right: 10px;
+            width: 130px;
+            height: auto;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>Site Admin</h1>
+    <h2>Welcome, {{user.first_name}}</h2>
+    <div class="container">
+    <form class="sort-form" method="GET" action="" onchange="this.submit()">
+        <label for="sort_by">Sort & Filter: </label>
+        <select name="sort_by" id="sort_by">
+            <option value="most_recent" {% if sort_by == 'most_recent' %}selected{% endif %}>Most Recent</option>
+            <option value="not_yet_seen" {% if sort_by == 'not_yet_seen' %}selected{% endif %}>Not Yet Seen</option>
+            <option value="priority" {% if sort_by == 'priority' %}selected{% endif %}>Priority (Highest to Lowest)</option>
+            <option value="hide_resolved" {% if sort_by == 'hide_resolved' %}selected{% endif %}>Hide Resolved Reports</option>
+        </select>
+    </form>
+    <ul>
+        {% for file in all_uploaded_files%}
+            <ul>
+                <div class="upload-module {% if file.status == 'Resolved' %}resolved{% endif %}" onclick="window.location.href='{% url 'login:upload_detail' file.id %}'">
+                    {% if file.status == 'New' %}
+                        <img class="new-status-image" src="../../static/images/new.jpg" alt="New">
+                    {% endif %}
+                    <h4>{% if file.title != '' %} {{file.title}} {% else %} Report {% endif %}</h4>
+                    <p><span>Status: {{file.status}}</span></p>
+
+                    <p><span>Priority:
+                  {% if file.status != "Resolved" %}
+                    {% if file.priority == 1 %} <img class="priority-image" src="../../static/images/new-lowest.jpg">
+                    {% elif file.priority == 2 %} <img class="priority-image" src="../../static/images/new-low.jpg">
+                    {% elif file.priority == 3 %} <img class="priority-image" src="../../static/images/new-mod.jpg">
+                    {% elif file.priority == 4 %} <img class="priority-image" src="../../static/images/new-high.jpg">
+                    {% elif file.priority == 5 %} <img class="priority-image" src="../../static/images/new-highest.jpg">
+                    {% endif %}
+                {% else %}
+                    {% if file.priority == 1 %} <img class="priority-image" src="../../static/images/res-lowest.jpg">
+                    {% elif file.priority == 2 %} <img class="priority-image" src="../../static/images/res-low.jpg">
+                    {% elif file.priority == 3 %} <img class="priority-image" src="../../static/images/res-mod.jpg">
+                    {% elif file.priority == 4 %} <img class="priority-image" src="../../static/images/res-high.jpg">
+                    {% elif file.priority == 5 %} <img class="priority-image" src="../../static/images/res-highest.jpg">
+                    {% endif %}
+                    {% endif %}
+                </span></p>
+
+                    <p><span>User Comment: {{file.user_comment}}</span></p>
+                    <p><span>Admin Comment: {{file.admin_comment}}</span></p>
+                </div>
+            </ul>
+        {% endfor %}
+    </ul>
+    </div>
+</body>
+</html>
+{% endblock content %}
+

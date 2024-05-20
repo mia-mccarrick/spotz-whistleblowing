@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Team A19">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Spotz Home</title>
+
+    
+<link href="static/login/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+    <link href="static/login/home.css" rel="stylesheet">
+  </head>
+  <body class="d-flex h-100 text-center text-white bg-dark">
+    
+<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="mb-auto">
+    <div>
+      <h3 class="float-md-start mb-0">Spotz</h3>
+      <nav class="nav nav-masthead justify-content-center float-md-end" role="tablist">
+        <a class="nav-link active" href="#" aria-current="page" id="home-tab">Home</a>
+        <a class="nav-link active" href="#" id="features-tab">Features</a>
+        <a class="nav-link active" href="#" id="contact-tab">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="home-content" class="content-tab">
+    {% load socialaccount %}
+  <main class="px-3">
+    <h1>Welcome to Spotz.</h1>
+    <p class="lead">Spotz is a place to report on what you see, find, or experience here on grounds.</p>
+    <p class="lead">
+      <a href="{% provider_login_url 'google' %}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Log In</a>
+      <a href="{% url 'login:mainpage' %}" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Anonymous</a>
+    </p>
+  </main>
+  </div>
+
+  <div id="features-content" class="content-tab" style="display:none;">
+    <h1>Features</h1>
+    <p>Spotz is a state-of-the-art, top-of-the-line, sophisticated, robust, and reliable reporting site; 
+      fully developed by college students. Trust us with your information.</p>
+    <h2>What can you do here?</h2>
+      <ul>Submit reports</ul>
+      <ul>Review your reports</ul>
+      <ul>That's most of it</ul>
+  </div>
+
+  <div id="contact-content" class="content-tab" style="display:none;">
+    <h1>Contact Us</h1>
+    <p>Steve Kim: <a href="mailto: hk5xb@virginia.edu" class="text-white">hk5xb@virginia.edu</a></p>
+    <p>Mia McCarrick: <a href="mailto: auf7cw@virginia.edu" class="text-white">auf7cw@virginia.edu</a></p>
+    <p>Xi Wang: <a href="mailto: xw2ez@virginia.edu" class="text-white">xw2ez@virginia.edu</a></p>
+    <p>Reece Mullahy: <a href="mailto: tbp3qy@virginia.edu" class="text-white">tbp3qy@virginia.edu</a></p>
+    <p>Andy Chen: <a href="mailto: njx7sq@virginia.edu" class="text-white">njx7sq@virginia.edu</a></p>
+    <!-- More content here -->
+  </div>
+
+
+
+  <footer class="mt-auto text-white-50">
+    <p>Project Developed by Group A-19</p>
+  </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#home-tab").click(function(){
+      $(".content-tab").hide();
+      $("#home-content").show();
+    });
+    $("#features-tab").click(function(){
+      $(".content-tab").hide();
+      $("#features-content").show();
+    });
+    $("#contact-tab").click(function(){
+      $(".content-tab").hide();
+      $("#contact-content").show();
+    });
+  });
+</script>
+
+
+    
+  </body>
+</html>
